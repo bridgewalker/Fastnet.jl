@@ -1,0 +1,4 @@
+name = "QuickNet"
+uuid = "db7a180e-9890-4e42-a5a9-70c35c26404d"
+authors = ["bridgewalker <thilo2gross@gmail.com>"]
+version = "0.1.0"
