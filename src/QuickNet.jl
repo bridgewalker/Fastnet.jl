@@ -1,13 +1,13 @@
 module QuickNet
 
-import LightGraphs
+using LightGraphs: AbstractGraph
+
+include("structure.jl")
 
 
 
-struct QuickNet
 
-end
+export QNet
 
-export QuickNet
 
 end
