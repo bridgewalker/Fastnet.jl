@@ -8,6 +8,7 @@ struct QLink
       t::Int64
       nf::Int64
       nt::Int64
+      typ::Int64
 end
 
 struct QNet <: AbstractGraph{Int64}

@@ -1,6 +1,6 @@
 module QuickNet
 
-using LightGraphs: AbstractGraph
+using LightGraphs
 using Repos
 
 include("structure.jl")
@@ -14,11 +14,22 @@ function QNet(N::Int,K::Int,S::Int64)
       )
 end
 
+function undirected(f::Int64,t::Int64)
+      return QLink(f,t,-1,-1,1)
+end
+
+
+function LightGraphs.add_edge!(g::QNet,e::AbstractEdge)
+      return src(e)      
+end
+
 function Base.show(io::IO, net::QNet)
       n=length(net.noderep)-length(class(net.noderep,1))
       k=length(net.linkrep)-length(class(net.linkrep,1))
-      println(io,"Network ($n nodes, $k links, $(net.S) states)")
+      println(io,"Network ($n nodes, $k links, $(net.S) node states)")
 end
+
+
 
 export QNet
 
