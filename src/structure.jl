@@ -12,6 +12,7 @@ struct QLink
 end
 
 struct QNet <: AbstractGraph{Int64}
+      init_state ::Int64         
       S ::Int64            #NodeStates
       s ::Int64            #Link States 0 if not initialized
       noderep::Repo{QNode}
