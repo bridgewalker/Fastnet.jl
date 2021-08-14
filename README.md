@@ -7,40 +7,75 @@ The package provides a convenient syntax that allows to implement common model i
 
 ## Example
 
+The followin file defines and runs an epidemiological SIS model:
+
 ```julia
-julia> using Repos
+using Fastnet
 
-julia> a=["Pepsis grossa","Smilodon populator","Nothrotheriops texanus","Phoberomys pattersoni"]
-4-element Array{String,1}:
- "Pepsis grossa"
- "Smilodon populator"
- "Nothrotheriops texanus"
- "Phoberomys pattersoni"
+const S=1                   # Node state 1: Susceptible node
+const I=2                   # Node state 2: Infected node
+const SI=1                  # Link state 1: Susceptible-Infected link 
 
-julia> animals=Repo(a,2)
-Repository of 4 objects in 2 classes
+const p=0.05                # Infection rate (per SI-link)
+const r=0.1                 # Recovery rate (per I-node)
 
-julia> alive=class(animals,2)
-Class of 0 objects
+SI_link=LinkType(S,I,2)     # This describes what we mean by SI-link 
 
-julia> setclass!(animals,1,2)
+# Lets make a network of 1M nodes and 4M links, 2 node states, that keeps track of SI links
+net=FastNet(1000000,4000000,2,[SI_link]; nodealias=["S","I"], linkalias=["SI"])
 
-julia> print_repo(animals)
-Repository of 2 classes
-  Class 1
-    1 - 4: Phoberomys pattersoni
-    2 - 2: Smilodon populator
-    3 - 3: Nothrotheriops texanus
-  Class 2
-    1 - 1: Pepsis grossa
+randomgraph!(net)           # Initialize as ER-random graph (all nodes will be in state 1: S)
 
-julia> print_repo(alive)
-Class of 1 objects
-    1 - 1: Pepsis grossa
+for i=1:20                  # Infect 20 nodes at random 
+    node=randomnode(net,S)
+    nodestate!(net,node,I)
+end
 
-julia> alive[1]
-"Pepsis grossa"
+function rates!(rates,t)    # This functins computes the rates of processes
+    infected=countnodes_f(net,I)        # count the infected nodes
+    activelinks=countlinks_f(net,SI)    # count the SI links
+    infrate=p*activelinks               # compute total infection rate
+    recrate=r*infected                  # compute total recovery rate 
+    rates[1]=infrate                    # Return the values by filling the rates array
+    rates[2]=recrate
+    nothing
+end
+
+function recovery!()        # This is what we do when the recovery process is triggered
+    inode=randomnode_f(net,I)                   # Find a random infected node
+    nodestate_f!(net,inode,S)                   # Set the state of the node to susceptible
+end
+
+function infection!()       # This is what we do when the infection process is triggered
+    alink=randomlink_f(net,SI)                   # Find a random SI link
+    nodestate_f!(net,linksrc_f(net,alink),I)     # Set both endpoints of the link to infected
+    nodestate_f!(net,linkdst_f(net,alink),I)    
+end
+
+sim=FastSim(net,rates!,[infection!,recovery!])   # initialize the simulation 
+
+@time runsim(sim,60.0,5.0)                       # Run for 60 timeunits (reporting every 5)
 ```
+
+This produces the output: 
+```julia
+Time    S       I       SI     
+0.0     999980      20      146
+5.0     999927      73      570
+10.0    999710     290     2199
+15.0    998734    1266     9499
+20.0    995152    4848    35743
+25.0    982053   17947   130184
+30.0    936454   63546   437860
+35.0    807731  192269  1133438
+40.0    585665  414335  1744756
+45.0    402526  597474  1708492
+50.0    319610  680390  1550403
+55.0    291675  708325  1482735
+60.0    281941  718059  1458951
+ 65.271643 seconds (806.64 M allocations: 12.244 GiB, 3.87% gc time, 0.04% compilation time)
+```
+
 
 ## Installation
 
