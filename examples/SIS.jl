@@ -1,4 +1,10 @@
 
+# This is an epidemiological SIS model. Each node is in either of two states susceptible (S) or it is infected (I).
+# The system changes in time due to two processes. First, for every link that connects an infected to a susceptible node (SI-link)
+# there is a chance that the disease is transmitted to the susceptible node. Such transmissions occur at a rate p per SI-link. 
+# Second, infected nodes recover in time, returning to the susceptible state (there is no period of immunity after recovery). 
+# Such recovery events occur at the rate r per infected node. 
+
 using Fastnet
 
 const S=1                   # Node state 1: Susceptible node
@@ -31,14 +37,16 @@ function rates!(rates,t)    # This functins computes the rates of processes
 end
 
 function recovery!()        # This is what we do when the recovery process is triggered
-    inode=randomnode_f(net,I)                   # Find a random infected node
-    nodestate_f!(net,inode,S)                   # Set the state of the node to susceptible
+    inode=randomnode_f(net,I)           # Find a random infected node
+    nodestate_f!(net,inode,S)           # Set the state of the node to susceptible
 end
 
 function infection!()       # This is what we do when the infection process is triggered
-    alink=randomlink_f(net,SI)                   # Find a random SI link
-    nodestate_f!(net,linksrc_f(net,alink),I)     # Set both endpoints of the link to infected
-    nodestate_f!(net,linkdst_f(net,alink),I)    
+    alink=randomlink_f(net,SI)          # Find a random SI link
+    src=linksrc_f(net,alink)            # Find the endpoints of the link
+    dst=linkdst_f(net,alink)
+    nodestate_f!(net,src,I)             # Set both endpoints of the link to infected
+    nodestate_f!(net,dst,I)              # this is quicker than finding who's infected 
 end
 
 sim=FastSim(net,rates!,[infection!,recovery!], saveas="result.csv")   # initialize the simulation 
