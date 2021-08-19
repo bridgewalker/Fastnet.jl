@@ -51,5 +51,5 @@ end
 
 sim=FastSim(net,rates!,[infection!,recovery!], saveas="result.csv")   # initialize the simulation 
 
-@time runsim(sim,60,5)                      # Run for 60 timeunits (reporting every 5)
+@time runsim(sim,60,5)      # Run for 60 timeunits (reporting every 5)
 
