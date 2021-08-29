@@ -19,7 +19,7 @@ const SI=1                              # Link state 1: Susceptible-Infected lin
 const p=0.05                            # Infection rate (per SI-link)
 const r=0.1                             # Recovery rate (per I-node)
 
-SI_link=LinkType(S,I,2)                 # This describes what we mean by SI-link 
+SI_link=LinkType(S,I)                   # This describes what we mean by SI-link 
 
 # Let's make a network of 1M nodes and 4M links, 2 node states, that keeps track of SI links
 net=FastNet(1000000,4000000,2,[SI_link]; nodealias=["S","I"], linkalias=["SI"])
@@ -34,10 +34,8 @@ end
 function rates!(rates,t)                # This functins computes the rates of processes
     infected=countnodes_f(net,I)                # count the infected nodes
     activelinks=countlinks_f(net,SI)            # count the SI links
-    infrate=p*activelinks                       # compute total infection rate
-    recrate=r*infected                          # compute total recovery rate 
-    rates[1]=infrate                            # Return the values by filling the rates array
-    rates[2]=recrate
+    rates[1]=p*activelinks                       # compute total infection rate
+    rates[2]=r*infected                          # compute total recovery rate 
     nothing
 end
 
@@ -54,7 +52,7 @@ end
 
 sim=FastSim(net,rates!,[infection!,recovery!])   # initialize the simulation 
 
-@time runsim(sim,60.0,5.0)                       # Run for 60 timeunits (reporting every 5)
+@time runsim!(sim,60.0,5.0)                      # Run for 60 timeunits (reporting every 5)
 ```
 
 This produces the output: 
