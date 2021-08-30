@@ -233,7 +233,7 @@ end
 
 sim=FastSim(net,rates!,[infection!,recovery!])   # initialize the simulation 
 
-@time runsim(sim,60.0,5.0)                       # Run for 60 timeunits (reporting every 5)
+@time runsim!(sim,60.0,5.0)                      # Run for 60 timeunits (reporting every 5)
 
 ```
 
