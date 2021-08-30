@@ -1,6 +1,5 @@
 module QuickNet
 
-using LightGraphs
 using Repos
 
 include("structure.jl")
