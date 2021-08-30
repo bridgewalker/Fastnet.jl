@@ -61,7 +61,8 @@ end
 
 Simulate the next event in *sim*.
 
-This function will always advance the sim by exactly one event. 
+This function will always advance the sim by exactly one event.
+If no event is possible it will advance time by one timeunit.  
 Output is generated at start time and directly after the event has occured. 
 
 See also [FastSim](#Fastnet.FastSim),[simstep](#Fastnet.simstep) 
@@ -100,21 +101,27 @@ julia> nodecounts(net)
 ```
 """
 function simstep!(sim::FastSim)
+    rng=sim.net.rng
     rates=MVector{sim.Nproc}(zeros(sim.Nproc))
     sim.ratefunc(rates,sim.t)
     tot=sum(rates)
-    rng=sim.net.rng
-    del=randexp(rng)/tot
+    if tot>0.0
+         del=randexp(rng)/tot
+    else 
+         del=1
+    end
     initsim(sim,del,del)
     sim.repfunc(sim,true)
     sim.t+=del
-    r=rand(rng,0.0:tot)-rates[1]
-    i=1
-    while(r>=0 && i<sim.Nproc)
-        i+=1
-        r-=rates[i]
+    if tot>0.0
+         r=rand(rng,0.0:tot)-rates[1]
+         i=1
+         while(r>=0 && i<sim.Nproc)
+            i+=1
+            r-=rates[i]
+        end
+        sim.procfunc[i]()
     end
-    sim.procfunc[i]()
     sim.repfunc(sim,false)
 end
 

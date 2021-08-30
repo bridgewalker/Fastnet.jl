@@ -177,8 +177,10 @@ function check_repositoryconsistency(net::FastNet)
 
     if error 
         println("\n    THERE WERE ERRORS\n")
+        false
     else
         println("OK")
+        true
     end
 end
 
@@ -199,8 +201,10 @@ function check_nodeaccounting(net::FastNet)
     end
     if error 
         println("\n    THERE WERE ERRORS\n")
+        false
     else
         println("OK")
+        true
     end
 end
 
@@ -221,8 +225,10 @@ function check_linkaccounting(net::FastNet)
     end
     if error 
         println("\n    THERE WERE ERRORS\n")
+        false
     else
         println("OK")
+        true
     end
 end
 
@@ -300,8 +306,10 @@ function check_endpointconsistency(net::FastNet)
 
     if error 
         println("\n    THERE WERE ERRORS\n")
+        false
     else
         println("OK")
+        true
     end
 end
 
@@ -325,8 +333,10 @@ function check_nodestateification(net::FastNet)
     end
     if error 
         println("\n    THERE WERE ERRORS\n")
+        false
     else
         println("OK")
+        true
     end
 end
 
@@ -365,8 +375,10 @@ function check_linkstateification(net::FastNet)
     end
     if error 
         println("\n    THERE WERE ERRORS\n")
+        false
     else
         println("OK")
+        true
     end
 end
 
@@ -381,6 +393,8 @@ inconsistencies could arise from a number of sources including software bugs, CP
 errors. This function checks the internal data stored in FastNet for consistency to make sure 
 that everything is alright. 
 
+The return value is true if all chacks have been passed, false otherwise. 
+
 See also [link](#Fastnet.link)
 
 # Examples 
@@ -390,7 +404,7 @@ julia> using Fastnet
 julia> net=FastNet(100,200,10,[])
 Network of 0 nodes and 0 links
 
-julia> healthcheck(net)
+julia> healthcheck(net);
   Checking repository consistency ... OK
   Checking node accounting ... OK
   Checking link accounting ... OK
@@ -400,11 +414,11 @@ julia> healthcheck(net)
 ```
 """
 function healthcheck(net::FastNet)
-    check_repositoryconsistency(net)
-    check_nodeaccounting(net)
-    check_linkaccounting(net)
-    check_endpointconsistency(net)
-    check_nodestateification(net)
-    check_linkstateification(net)
-    nothing
+    ok=true
+    ok=ok && check_repositoryconsistency(net) 
+    ok=ok && check_nodeaccounting(net)
+    ok=ok && check_linkaccounting(net)
+    ok=ok && check_endpointconsistency(net)
+    ok=ok && check_nodestateification(net)
+    ok=ok && check_linkstateification(net)
 end
