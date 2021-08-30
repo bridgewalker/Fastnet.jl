@@ -43,7 +43,7 @@ export FastNet,FastSim,LinkType,
     listnodes,               # Analaysis functions
     listnodesinstate,
     listneighbors,
-    results
+    results,
 
     runsim!,                  # Simulation 
     simstep!

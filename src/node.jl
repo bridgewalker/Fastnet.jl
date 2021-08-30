@@ -161,10 +161,6 @@ function randomnode_f(net::FastNet,cls::Union{Array,Tuple})
     node_f(net,i,old)     
 end
 
-function nodestate_f(net::FastNet,nid)
-    @inbounds net.nstate[nid]
-end
-
 function adjacent_f(net::FastNet,nida,nidb)
     @inbounds begin
         link=net.firstlinkout[nida]
