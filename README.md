@@ -91,7 +91,7 @@ julia> import Pkg
 
 julia> Pkg.add("Fastnet")
 ```
-**ACTUALLY IT IS NOT REGISTERED YET, CONTACT ME IF YOU WANT THE PACKAGE**
+**REGISTERATION IS IN PROGRESS, CONTACT ME IF YOU WANT THE PACKAGE**
 
 ## Documentation
 
@@ -100,7 +100,9 @@ Full documentation can be found here:
 
 ## Project Status
 
-This package was tested on Julia 1.6.2 on Windows.
+This package was tested on Julia 1.6.2 on Windows. This is still in an early version. 
+More testing is necessary, so use with caution. I am still actively developing this package, 
+so comments, feature requests etc. are very welcome. 
 
 ## Acknowledgements
 The original development of Fastnet was supported by the Volkswagen foundation. The current implementation in Julia was developed at HIFMB, a collaboration between the Alfred-Wegener-Institute, Helmholtz-Center for Polar and Marine Research, and the Carl-von-Ossietzky University Oldenburg, initially funded by the Ministry for Science and Culture of Lower Saxony (MWK) and the Volkswagen Foundation through the “Nieders&auml;chsisches Vorab” grant program (grant number ZN3285).
