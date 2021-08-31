@@ -106,3 +106,4 @@ so comments, feature requests etc. are very welcome. You can contact me via thil
 
 ## Acknowledgements
 The original development of Fastnet was supported by the Volkswagen foundation. The current implementation in Julia was developed at HIFMB, a collaboration between the Alfred-Wegener-Institute, Helmholtz-Center for Polar and Marine Research, and the Carl-von-Ossietzky University Oldenburg, initially funded by the Ministry for Science and Culture of Lower Saxony (MWK) and the Volkswagen Foundation through the “Nieders&auml;chsisches Vorab” grant program (grant number ZN3285).
+ 
