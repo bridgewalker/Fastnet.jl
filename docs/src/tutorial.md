@@ -1,6 +1,6 @@
 # Fastnet.jl Tutorial -- SIS Model
 
-**In this tutorial we are going to build an epidimological SIS model**
+**In this tutorial we are going to build an epidemiological SIS model**
 
 ## The SIS Model
 The SIS model describes the spreading of an epidemic disease across a social network. The network nodes represent individuals, whereas the links represent repeated contacts between individuals that allow the disease to spread.  
@@ -80,7 +80,7 @@ To get our epidemic going we will need some infected, so we use a simple for loo
 Once we have picked a random node we use *nodestate!* to change the state of the node to infected. The time required for this command scales with the number of link states that we keep track of and the degree of the node, but not on the overall size of the network. 
 
 ## The rates! function 
-Now that we have our network set up, it's time to get to the physics of the system, i.e.~the rules that will drive the dyanmics. A crucial part of an event-driven simulation is to calculate how fast the different processes run in the current state of the network (whatever that may be). In our SIS model we calculate these rate in the following function
+Now that we have our network set up, it's time to get to the physics of the system, i.e.~the rules that will drive the dynamics. A crucial part of an event-driven simulation is to calculate how fast the different processes run in the current state of the network (whatever that may be). In our SIS model we calculate these rate in the following function
 
 ```julia
 function rates!(rates,t)    # This functins computes the rates of processes
