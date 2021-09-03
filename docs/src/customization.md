@@ -4,7 +4,7 @@ FastNet is designed to run the most common types of discrete-event network simul
 If what you need to do is very different from these typical use cases you will probably need a different tool. However, between these extremes there is a grey area where you may be able to achieve your goals by 
 customizing Fastnet. 
 
-## Constom Output Functions
+## Custom Output Functions
 If you all you need is a different output, you can pass your own reporting function to FastSim. For reference, the default reporting function is called *showresults* and can be found in the simulation.jl source file. 
 The reporting function is a function of the form 
 ```julia
