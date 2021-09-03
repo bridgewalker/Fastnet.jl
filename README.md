@@ -91,7 +91,6 @@ julia> import Pkg
 
 julia> Pkg.add("Fastnet")
 ```
-**REGISTERATION IS IN PROGRESS, CONTACT ME IF YOU WANT THE PACKAGE**
 
 ## Documentation
 
