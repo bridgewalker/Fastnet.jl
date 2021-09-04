@@ -1,4 +1,4 @@
-
+using Fastnet
 
 const S=1                   # Node state 1: Susceptible node
 const I=2                   # Node state 2: Infected node
