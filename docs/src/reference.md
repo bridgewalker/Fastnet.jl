@@ -62,9 +62,13 @@ runsim!
 ## Debug & Analysis
 ```@docs
 healthcheck
+listlinks
 listnodes
 listneighbors
+listnodestates
 results
+savelinklist
+savenodeinfo
 showlinks
 shownodes
 ```
