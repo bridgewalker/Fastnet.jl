@@ -41,9 +41,13 @@ export FastNet,FastSim,LinkType,
     healthcheck,
     
     listnodes,               # Analaysis functions
+    listlinks,
     listnodesinstate,
     listneighbors,
+    listnodestates,
     results,
+    savelinklist,
+    savenodeinfo,
 
     runsim!,                  # Simulation 
     simstep!
