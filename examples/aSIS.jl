@@ -4,18 +4,18 @@ const S=1                   # Node state 1: Susceptible node
 const I=2                   # Node state 2: Infected node
 const SI=1                  # Link state 1: Susceptible-Infected link 
 
-p=0.006                    # Infection rate (per SI-link)
+p=0.004                     # Infection rate (per SI-link)
 r=0.002                     # Recovery rate (per I-node)
-w=0.5                     # Rewiring rate (per SI-link)
+w=0.2                       # Rewiring rate (per SI-link)
 
 SI_link=LinkType(S,I)     # This describes what we mean by SI-link 
 
 # Lets make a network of 100k nodes and 400k links, 2 node states, that keeps track of SI links
-net=FastNet(1000000,10000000,2,[SI_link]; nodealias=["S","I"], linkalias=["SI"])
+net=FastNet(100000,1000000,2,[SI_link]; nodealias=["S","I"], linkalias=["SI"])
 
 randomgraph!(net)           # Initialize as ER-random graph (all nodes will be in state 1: S)
 
-for i=1:500000               # Infect 20 nodes at random 
+for i=1:96000               # Infect 20 nodes at random 
     node=randomnode(net,S)
     nodestate!(net,node,I)
 end
@@ -58,5 +58,5 @@ end
 
 sim=FastSim(net,rates!,[infection!,recovery!,rewire!])   # initialize the simulation 
 
-@time runsim!(sim,60)                      # Run for 60 timeunits (reporting every 5)
+@time runsim!(sim,500,20)                       # Run for 60 timeunits (reporting every 5)
 
