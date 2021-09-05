@@ -2,6 +2,7 @@
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://bridgewalker.github.io/Fastnet.jl/stable)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://bridgewalker.github.io/Fastnet.jl/dev)
+[![DOI](https://zenodo.org/badge/293316116.svg)](https://zenodo.org/badge/latestdoi/293316116)
 
 **Fastnet is a Julia package that allows very fast (linear-time) simulation of discrete-state dynamical processes on networks, such as commonly studied models of epidemics**
 
