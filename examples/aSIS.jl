@@ -1,3 +1,10 @@
+
+# This file implements the adaptive SIS model from :
+#
+#      Gross, Dommar, Blasius: "Epidemic dynamics on an adaptive network"
+#      Physical Review Letters 96, 208701, 2006
+#      doi: 10.1103/PhysRevLett.96.208701
+
 using Fastnet
 
 const S=1                   # Node state 1: Susceptible node

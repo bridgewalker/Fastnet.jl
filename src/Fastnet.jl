@@ -35,7 +35,10 @@ export FastNet,FastSim,LinkType,
     linkexists_f,linkexists,
     randomlink_f,randomlink,
 
-    nullgraph!,randomgraph!,  # networktools
+    nullgraph!,             # networktools
+    randomgraph!,
+    configmodel!,
+    emptygraph!,
 
     showlinks,shownodes,     # Debug Functions
     healthcheck,
