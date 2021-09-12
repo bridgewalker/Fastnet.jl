@@ -167,3 +167,195 @@ function fastprint(sim::FastSim,x...)
         print(sim.printresults,x...)
     end
 end
+
+function _configmodelsetup!(net,degreedist,N,S)
+    nullgraph!(net)
+    n=0
+    try
+        n=convert(Int,N)
+    catch e
+        throw(ArgumentError("Configuration model expects the number of nodes N to be an integer."))
+    end
+    if n==0
+        n=net.N
+    end
+    if n<1
+        throw(ArgumentError("The number of nodes N specified for configuration model is too low"))
+    end
+    if n<0
+        throw(ArgumentError("Configuration model expects the number of nodes, N, to be positive"))
+    end
+    if n>net.N
+        throw(ArgumentError("The requested configuration model network exceeds the max nodecount for the underlying FastNet"))
+    end
+    checknodestate(net::FastNet,S,"Trying to create configuration model network")  
+    counts=_countsfromdd(degreedist,n)
+    isolated=N-sum(counts)
+    totallinks=0
+    mx=length(counts)
+    for i=1:mx
+        totallinks+=i*counts[i]
+    end
+    if totallinks÷2>net.K
+        throw(ArgumentError("The requested configuration model exceeds the max linkcount allowed by the underlying FastNet"))
+    end
+    makenodes_f!(net,n,S)
+    (counts,totallinks)
+end
+
+function _randindexdd(rng,list::Union{Array,Tuple})
+    L=length(list)
+    r=rand(rng)-list[1]
+    ret=1
+    while r>0.0 && ret<L
+        ret+=1
+        r-=list[ret]
+    end
+    if r>0.0 
+        0
+    else
+        ret
+    end
+end
+
+function _randindex(rng,list::Union{Array,Tuple})
+    L=length(list)
+    t=sum(list)
+    r=rand(rng)*t-list[1]
+    ret=1
+    while r>0.0 && ret<L
+        ret+=1
+        r-=list[ret]
+    end
+    ret
+end
+
+
+
+
+function _countsfromdd(degreedist,n)
+    if !(isa(degreedist,AbstractVector) || isa(degreedist,Tuple))
+         throw(ArgumentError("The passed degree distribution needs to be a Vector of Floats"))
+    end
+    mx=length(degreedist)
+    if mx<1
+        throw(ArgumentError("The passed degree distribution needs to contain at least one element"))
+    end
+    dd=Array{Float64,1}(undef,mx)
+    for i=1:mx
+        try
+            dd[i]=convert(Float64,degreedist[i])
+        catch e
+            throw(ArgumentError("Cannot interpret elment number $i of the degree distribution as a Float variable"))
+        end        
+        if dd[i]<0.0
+            throw(ArgumentError("The degree distribution should contain non-negative elements, but element $i seems to be negative"))
+        end
+        if dd[i]>1.0
+            throw(ArgumentError("The degree distribution should be probabilities, but element $i seems to be greater than 1"))
+        end
+    end
+    if sum(dd)>1.0
+        throw(ArgumentError("The specified degree distribution sums to more than 1.0"))        
+    end
+    zerop=1.0-sum(dd)
+    counts=[Int(floor(dd[i]*n)) for i=1:mx]
+    diffs=[dd[i]*n-Float64(counts[i]) for i=1:mx]
+    nodessofar=sum(counts)
+    nonisolated=Int(round(sum(dd)*n))
+    while nodessofar<nonisolated
+        (val,idx)=findmax(diffs)
+        diffs[idx]=0.0
+        nodessofar+=1
+        counts[idx]+=1
+    end  
+    stubs=0
+    for i=1:mx
+        stubs+=i*counts[i]
+    end
+    if isodd(stubs)               # All this stuff is just for fixing odd numbers of stubs
+        peak=(1,2)
+        peakdel=-1.0
+        diff=1.0
+        for i=2:mx
+            if (counts[i]==0)
+                continue
+            end
+            for j=1:i-1 
+                if (counts[j]==0)
+                    continue
+                end
+                del=(counts[i]-dd[i]*n)-(counts[j]-dd[j]*n)  
+                if abs(del)>peakdel
+                    if del<0 
+                        peakdel=-del
+                        diff=-1
+                    else
+                        peakdel=del
+                        diff=1
+                    end
+                    peakdel=del
+                    peak=(i,j)
+                end
+            end
+        end
+        counts[peak[1]]-=diff
+        counts[peak[2]]+=diff
+    end
+    stubs=0
+    for i=1:mx
+        stubs+=i*counts[i]
+    end
+    if isodd(stubs)
+        idx=1
+        while idx<mx && count[idx]==0                
+            idx+=2
+        end
+        count[idx]-=1
+    end
+    counts
+end
+
+function hhtest(counts)
+    c=copy(counts)
+    last=length(c)
+    adds=zeros(last)
+    while last>1
+        while c[last]>0
+            c[last]-=1
+            dist=last
+            cur=last
+            while dist>0
+                if cur<1 
+                    return false
+                end 
+                sub=dist
+                if sub>c[cur]
+                    sub=c[cur]
+                end
+                dist-=sub
+                c[cur]-=sub
+                if (cur>1) 
+                    adds[cur-1]=sub
+                end
+                cur-=1
+            end
+            for i=1:last
+                c[i]+=adds[i]
+                adds[i]=0
+            end
+        end
+        last-=1;
+    end
+    if iseven(c[1])
+        true
+    else
+        false
+    end    
+end
+
+
+
+
+
+

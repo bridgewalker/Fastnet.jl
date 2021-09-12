@@ -37,9 +37,16 @@ function checknodeid(net::FastNet,nid,task)
 end
 
 function checknodestate(net::FastNet,cls,task)
-    if cls<1 || cls>net.C  
-        throw(ArgumentError("$task, but $cls is not a valid node state"))  
+    s=0
+    try 
+        s=convert(Int,cls)
+    catch e
+        throw(ArgumentError("$task, but the provided node state does not seem to be an integer value")) 
     end
+    if s<1 || s>net.C  
+        throw(ArgumentError("$task, but $s is not a valid node state"))  
+    end
+    s
 end
 
 function checknodeexists(net::FastNet,nid,task)

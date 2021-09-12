@@ -37,8 +37,10 @@ export FastNet,FastSim,LinkType,
 
     nullgraph!,             # networktools
     randomgraph!,
-    configmodel!,
     emptygraph!,
+    configmodel!,
+    regulargraph!,
+    rectlattice!,
 
     showlinks,shownodes,     # Debug Functions
     healthcheck,
@@ -51,6 +53,7 @@ export FastNet,FastSim,LinkType,
     results,
     savelinklist,
     savenodeinfo,
+    degreedist,
 
     runsim!,                  # Simulation 
     simstep!

@@ -178,7 +178,7 @@ Network of 2 nodes and 1 links
 ```
 """
 function makelink!(net::FastNet,src,dst)
-    task="Traing to create link from node $src to node $dst"
+    task="Trying to create link from node $src to node $dst"
     checknodeid(net::FastNet,src,task)
     checknodeexists(net::FastNet,src,task)
     checknodeid(net::FastNet,dst,task)
