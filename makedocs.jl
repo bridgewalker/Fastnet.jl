@@ -1,11 +1,11 @@
 using Base: root_module
 using Pkg
-Pkg.activate("fastnet")
+Pkg.activate("Fastnet.jl")
 using Fastnet
 using Documenter
 
 makedocs(
-    root="C:\\Users\\Thilo\\Google Drive\\Work\\DVLP\\FastNet\\fastnet\\docs",
+    root="C://Users//Thilo//Documents//DVLP//FastnetDev//Fastnet//Fastnet.jl//docs",
     modules     = [Fastnet],
     format = Documenter.HTML(
         prettyurls = false,
