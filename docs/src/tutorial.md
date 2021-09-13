@@ -12,7 +12,7 @@ The system changes in time due to two processes:
 2. Infected nodes recover in time, returning to the susceptible state (there is no period of immunity after recovery). Such recovery events occur at the rate *r* per infected node. 
 
 ## Preparations
-We now write a short program that simulates the SIS model using Fastnet. We start by invoking the package and and defining some helpful constants
+We now write a short program that simulates the SIS model using Fastnet. We start by invoking the package and defining some helpful constants
 
 ```julia 
 using Fastnet
@@ -57,7 +57,7 @@ net=FastNet(1000000,4000000,2,[SI_link]; nodealias=["S","I"], linkalias=["SI"])
 The initial command constructs the data structure for the network itself. The first two arguments tell it how many nodes and links we want to have in the network at most. Here we go with one million links and four million nodes. (Don't worry, Fastnet is fast, even with a million nodes the simulation finishes in about a minute on my laptop).
 The thrid argument is the number of states that we allow for the nodes. 
 
-The fourth argument is more interesting. It is an array of all the link types we want to keep track off. In our case this array contains only one link type, the SI_link type that we just defined. Because *SI_link* is the first entry in the array Fastnet will think of SI-links as link state 1.
+The fourth argument is more interesting. It is an array of all the link types we want to keep track of. In our case this array contains only one link type, the SI_link type that we just defined. Because *SI_link* is the first entry in the array Fastnet will think of SI-links as link state 1.
 
 The arguments discussed above are the only essential arguments for the network constructor. However, we include two more optional arguments to make the output prettier. These are implemented as named arguments. In Julia we can provide such named arguments in any order or not at all, but we have to state their name so that Julia knows which arguments we want to specify. One of the optional arguments is called nodealias, and it accepts a vector of strings. Fastnet will use these strings to refer to the node states in outputs. The second argument linkalias does the same job for links. So in summary the first command tells Julia that we want a network of up to 1M nodes, up to 4M links, where the nodes can be in either of two states, which want to be called S and I in outputs. We want Fastnet to keep track of links between nodes in state S and nodes in state I, and we want it to refer to those links as SI in outputs.    
 
@@ -80,7 +80,7 @@ To get our epidemic going we will need some infected, so we use a simple for loo
 Once we have picked a random node we use *nodestate!* to change the state of the node to infected. The time required for this command scales with the number of link states that we keep track of and the degree of the node, but not on the overall size of the network. 
 
 ## The rates! function 
-Now that we have our network set up, it's time to get to the physics of the system, i.e.~the rules that will drive the dynamics. A crucial part of an event-driven simulation is to calculate how fast the different processes run in the current state of the network (whatever that may be). In our SIS model we calculate these rate in the following function
+Now that we have our network set up, it's time to get to the physics of the system, i.e. the rules that will drive the dynamics. A crucial part of an event-driven simulation is to calculate how fast the different processes run in the current state of the network (whatever that may be). In our SIS model we calculate these rate in the following function
 
 ```julia
 function rates!(rates,t)    # This functins computes the rates of processes

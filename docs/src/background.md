@@ -8,9 +8,9 @@ If we think about simulating processes on networks, the first idea that usually 
 
 2. Collisions -- What do we do if different events that occur in one timestep are contradictory? For example what if a node in an epidemic situation infects another node and recovers from the disease at the same time. Does the infection always go first? Or can the recovery occur first making the infection event impossible? 
 
-3. Timeing artifacts -- Even if we find elegant solutions for event collisions and update order, we are still approximating a real-word system in which time flows continously by a model in which time proceeds in discrete steps. This in itself can cause some artifacts. For example it can lead to the formation of certain patterns which won't occur in the continuous time system.  
+3. Timing artifacts -- Even if we find elegant solutions for event collisions and update order, we are still approximating a real-word system in which time flows continously by a model in which time proceeds in discrete steps. This in itself can cause some artifacts. For example it can lead to the formation of certain patterns which won't occur in the continuous time system.  
 
-4. Efficiency -- The most common solution to the problems above is to make timesteps tiny. While this lessens the impact of the artifacts it does not prevent them altogether. Moreover, it comes at a high cost in terms of efficiency. We will need to simulate many timesteps to cover the desired stretch of time, and in each of these steps we will be checking a large number of nodes for possible updates. However, since out timesteps are now tiny the probability that a given node is affected by an event in a given timestep is tiny, often in below 1 in a million. This means we spent a lot of computation time to do updates on nodes in which nothing changes at all.  
+4. Efficiency -- The most common solution to the problems above is to make timesteps tiny. While this lessens the impact of the artifacts it does not prevent them altogether. Moreover, it comes at a high cost in terms of efficiency. We will need to simulate many timesteps to cover the desired stretch of time, and in each of these steps we will be checking a large number of nodes for possible updates. However, since our timesteps are now tiny the probability that a given node is affected by an event in a given timestep is tiny, often in below 1 in a million. This means we spent a lot of computation time to do updates on nodes in which nothing changes at all.  
 
 Simulations that work with discrete timesteps can still be a good idea if the underlying system fundamentally works in discrete timesteps. However, in the vast majority of cases we can simulate systems better, faster, and more elgantly by not using timesteps at all...
 
@@ -23,11 +23,11 @@ Gillespie (1976). "A General Method for Numerically Simulating the Stochastic Ti
 
 The basic idea is that the simulation code will consider the system and then determine (stochastically) which event will happen next in the system and at which time this event will occur. The simulation then jumps forward directly to the time point where the next event occurs and implements the consequences of this event. Once the model has been updated in this way the simulation considers it again to determine what the next event is, and so on. 
 
-With Gillespie's algorithm events can never collide. Moreover there can be no articfacts due to timesteps, because there are no discrete timesteps. Also, the simulation is highly efficient because no time is wasted between events. 
+With Gillespie's algorithm events can never collide. Moreover there can be no artifacts due to timesteps, because there are no discrete timesteps. Also, the simulation is highly efficient because no time is wasted between events. 
 As a result Gillespie-style event-driven simulations combine excellent performance with a high degree of realism. 
 
 ## Making it fast
-The heart of any event driven simulation are a number of functions. One of these is used to calculate the rates at which processes occur given the state in the system (the *rates!* function). The others implement the individual processes that can occur in the system. 
+The heart of any event-driven simulation are a number of functions. One of these is used to calculate the rates at which processes occur given the state in the system (the *rates!* function). The others implement the individual processes that can occur in the system. 
 
 The key to making event-driven simulations fast is to make sure that these core functions can run without needing to consider (e.g. without needing to iterate over all network nodes). Fastnet achieves this by clever bookkeeping that makes use of an innovative data structure. Using this bookkeeping, the tools one needs in a network simulation such as 
  - finding the number of nodes or links in a certain state, 

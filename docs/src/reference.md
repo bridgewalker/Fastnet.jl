@@ -13,6 +13,9 @@ FastSim
 ```@docs
 nullgraph!
 randomgraph!
+configmodel!
+regulargraph!
+rectlattice!
 ```
 
 ## Node Functions
@@ -61,10 +64,15 @@ runsim!
 
 ## Debug & Analysis
 ```@docs
+degreedist
 healthcheck
+listlinks
 listnodes
 listneighbors
+listnodestates
 results
+savelinklist
+savenodeinfo
 showlinks
 shownodes
 ```
