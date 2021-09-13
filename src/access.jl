@@ -116,6 +116,7 @@ See also [listnodes](#Fastnet.listnodes)
 
 # Example
 ```jldoctest
+julia> using Fastnet
 
 julia> net=FastNet(10,10,2,[])
 Network of 0 nodes and 0 links

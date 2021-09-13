@@ -126,7 +126,7 @@ julia> using Fastnet
 julia> net=FastNet(1000,2000,2,[])
 Network of 0 nodes and 0 links
 
-julia> configmodel_fast!(net,[0.5,0.25,0.25],N=200)
+julia> configmodel!(net,[0.5,0.25,0.25],N=200)
 Network of 200 nodes and 175 links
 
 julia> degreedist(net)
@@ -135,7 +135,7 @@ julia> degreedist(net)
  0.25
  0.25
 
-julia> configmodel_fast!(net,[0.5,0.25],N=200)
+julia> configmodel!(net,[0.5,0.25],N=200)
 Network of 200 nodes and 100 links
 
 julia> degreedist(net)
