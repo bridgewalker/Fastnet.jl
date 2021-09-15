@@ -3,11 +3,11 @@
 ## Accessing nodes and links
 In Fastnet there are two ways to refer to a specific network node:
 
-1. Node ID -- Every node has a unique id number that never changes. The id number may be recycled if a node is destroyed and later another node is created. All id numbers are integers in the range 1:N, where N is the maximal node number that was passed to the FastNet constructor when the network was created. Node IDs are not necessarily consecutive so a network containing two nodes could contain the nodes with ids 17 and 23 for example. 
+1. Node ID -- Every node has a unique ID number that never changes. The ID number may be recycled if a node is destroyed and later another node is created. All ID numbers are integers in the range 1:N, where N is the maximal node number that was passed to the FastNet constructor when the network was created. Node IDs are not necessarily consecutive so a network containing two nodes could contain the nodes with IDs 17 and 23 for example. 
 
 2. Node state and position -- We can also identify nodes by saying "the n'th node in state x" where n is one of the allowed node states and x is the so-called positon in this state. So in the epidemic model from the tutorial we might say we want the first infected node. A state-position pair will not always refer to the same node, but the positions are always numbered consecutively, so if there are two infected nodes these will have the positions 1 and 2 in the infected state.
 
-In general the FastNet functions expect you to refer to nodes by node ID. However, class and position is useful for example if you want to iterate over all nodes in a certain state. You can obtain the id of a node at a certain position using the function 
+In general the FastNet functions expect you to refer to nodes by node ID. However, class and position is useful for example if you want to iterate over all nodes in a certain state. You can obtain the ID of a node at a certain position using the function 
 ```julia
 node(net,ste,pos)
 ```
