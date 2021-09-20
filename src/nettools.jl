@@ -368,13 +368,13 @@ function rectlattice!(net::FastNet,dims::Union{Int,Tuple,AbstractVector};S=1,per
     net
 end
 
-function topologyfromlinklist(net::Fastnet,)
+function topologyfromlinklist(net::FastNet,filename::String)
     
 
 end
 
 #WIP
-function nodesfromfile(net::Fastnet,filename::String)
+function nodesfromfile(net::FastNet,filename::String)
     try
         file=open(filename,"r")
     catch e
