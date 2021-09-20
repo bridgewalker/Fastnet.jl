@@ -300,7 +300,6 @@ Keyword arguments are
 ```jldoctest
 julia> using Fastnet
 
-
 julia>  net=FastNet(2000,6000,2,[])
 Network of 0 nodes and 0 links
 
@@ -369,11 +368,20 @@ function rectlattice!(net::FastNet,dims::Union{Int,Tuple,AbstractVector};S=1,per
     net
 end
 
+function topologyfromlinklist(net::Fastnet,)
+    
 
+end
 
-
-
-
+#WIP
+function nodesfromfile(net::Fastnet,filename::String)
+    try
+        file=open(filename,"r")
+    catch e
+        throw(ArgumentError("Unable to open file $filename"))
+    end
+    nullgraph!(net)
+end 
 
 
 ### WIP
