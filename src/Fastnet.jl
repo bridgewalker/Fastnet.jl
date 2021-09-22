@@ -41,6 +41,7 @@ export FastNet,FastSim,LinkType,
     configmodel!,
     regulargraph!,
     rectlattice!,
+    adjacency!,
 
     showlinks,shownodes,     # Debug Functions
     healthcheck,

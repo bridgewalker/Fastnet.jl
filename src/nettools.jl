@@ -316,7 +316,12 @@ julia> degreedist(net)
  0.9
 ```
 """
-function rectlattice!(net::FastNet,dims::Union{Int,Tuple,AbstractVector};S=1,periodic=false)
+function rectlattice!(
+        net         ::FastNet,
+        dims        ::Union{Int,Tuple,AbstractVector};
+        S           ::Integer=1,
+        periodic    ::Union{AbstractArray,Bool,Tuple}=false
+    )
     task="Trying to create a rectangular lattice"
     d=[dims...]
     nd=length(d)
@@ -368,21 +373,96 @@ function rectlattice!(net::FastNet,dims::Union{Int,Tuple,AbstractVector};S=1,per
     net
 end
 
-function topologyfromlinklist(net::FastNet,filename::String)
-    
+"""
+    adjacency!(net,mat;S=1)
 
-end
+Create a network with given adjacency matrix.
 
-#WIP
-function nodesfromfile(net::FastNet,filename::String)
-    try
-        file=open(filename,"r")
-    catch e
-        throw(ArgumentError("Unable to open file $filename"))
+The network in *net* is replaced with the new topology that is specified by the adjacency matrix *mat*. 
+If direction of links matters note that the element *mat[i,j]* corresponds to the link from j to i. 
+
+Symmeric matrices will not result in parallel links, instead the link is placed in an arbitrary direction. 
+
+Note that node *n* in the matrix will be the node in position *n* in *net* after creation, which is 
+not necessarily the node with ID *n*, if you need to find a particular node at a later time then it
+is best to save its id using the node(net,pos) function directly after calling adjacency!(net,mat). 
+
+If *net* is not large enough to accomodate the desired number of nodes or links an argument error 
+will be thrown. 
+
+Keyword arguments are 
+- S : The state of the nodes. All nodes will be set to this state. 
+
+# Examples 
+```jldoctest
+julia> using Fastnet
+
+julia> net=FastNet(1000,2000,2,[])
+Network of 0 nodes and 0 links
+
+julia> mat=[0 1 0; 1 0 1; 0 1 0]
+3×3 Matrix{Int64}:
+ 0  1  0
+ 1  0  1
+ 0  1  0
+
+julia> adjacency!(net,mat)
+Network of 3 nodes and 2 links
+```
+"""
+function adjacency!(
+        net     ::FastNet,
+        mat     ::AbstractMatrix;
+        S       ::Integer=1
+    )
+    task="Trying to create topology from adjacency matrix"
+    x,y=size(mat)
+    if x!=y
+        err=task*", but adjacency! expects a square matrix as its second argument and received a rectangular one"
+        throw(ArgumentError(err)) 
+    end
+    if x>net.N 
+        throw(ArgumentError(task*", but the matrix is larger than the maximum number of allowed nodes by the network")) 
+    end
+    s=checknodestate(net,S,task)
+    count=0
+    b1=false
+    b2=false
+    for i=1:x-1
+        for j=i+1:x
+            try 
+                b1=convert(Bool,mat[i,j])
+                b2=convert(Bool,mat[i,j])
+            catch e
+                throw(ArgumentError(task*", but was unable to convert an element of mat to Bool"))
+            end
+            if b1||b2
+                count+=1 
+            end
+        end
+    end
+    if count>net.K
+        throw(ArgumentError(task*", but the matrix contains more links than permitted by net"))
     end
     nullgraph!(net)
-end 
-
+    makenodes!(net,x,s)
+    for i=1:x
+        dst=node_f(net,i)
+        for j=i+1:x
+            src=node_f(net,j)
+            linked::Bool = mat[i,j]
+            if linked
+                makelink_f!(net,src,dst) 
+            else 
+                linked = mat[j,i]
+                if linked
+                    makelink_f!(net,dst,src) 
+                end
+            end
+        end
+    end
+    net
+end
 
 ### WIP
 function configmodel_DG!(net::FastNet,degreedist,N::Int=0,S::Int=1)
