@@ -466,9 +466,7 @@ end
 
 ### WIP
 function configmodel_DG!(net::FastNet,degreedist,N::Int=0,S::Int=1)
-    (counts,totalstubs)=_configmodelsetup!(net,degreedist,N,S)
-
-    
+    (counts,totalstubs)=_configmodelsetup!(net,degreedist,N,S)    
 
     println("On track")
 end

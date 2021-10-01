@@ -1,4 +1,8 @@
 
+
+const EPS=nextfloat(0.0)
+
+
 """
     LinkType(from,to,dir=2) 
 
