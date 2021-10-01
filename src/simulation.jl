@@ -113,10 +113,11 @@ function simstep!(sim::FastSim)
     initsim(sim,del,del)
     sim.repfunc(sim,true)
     sim.t+=del
+    println(tot)
     if tot>0.0
-         r=rand(rng,0.0:tot)-rates[1]
+         r=rand(rng,EPS:tot)-rates[1]
          i=1
-         while(r>=0 && i<sim.Nproc)
+         while(r>0.0 && i<sim.Nproc)
             i+=1
             r-=rates[i]
         end
@@ -210,9 +211,9 @@ function runsim!(sim::FastSim,dur,out=1.0)
                 sim.repfunc(sim,false)
                 nextout+=Tout
             end
-            r=rand(net.rng,0.0:tot)-rates[1]
+            r=rand(net.rng,EPS:tot)-rates[1]
             i=1
-            while(r>=0 && i<Nproc)
+            while(r>0 && i<Nproc)
                 i+=1
                 r-=rates[i]
             end

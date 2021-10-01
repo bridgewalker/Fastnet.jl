@@ -158,7 +158,7 @@ function randomnode_f(net::FastNet,cls::Union{Array,Tuple})
         old=cr
         cr=old-countnodes_f(net,cls[i])
     end
-    node_f(net,i,old)     
+    node_f(net,cls[i],old)     
 end
 
 function adjacent_f(net::FastNet,nida,nidb)

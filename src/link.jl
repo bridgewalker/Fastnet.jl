@@ -120,7 +120,7 @@ function randomlink_f(net::FastNet,cls::Union{Array,Tuple})
         old=cr
         cr=old-countlinks_f(net,cls[i])
     end
-    link_f(net,i,old)     
+    link_f(net,cls[i],old)     
 end
 
 
