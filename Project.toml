@@ -1,11 +1,10 @@
 name = "Fastnet"
 uuid = "020e4cdc-d87b-429d-8327-eec64f3aefd1"
 authors = ["bridgewalker <thilo2gross@gmail.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 Formatting = "59287772-0a20-5a39-b81b-1366585eb4c0"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Repos = "952dd333-a03f-400d-b720-7cb119ba64f7"
