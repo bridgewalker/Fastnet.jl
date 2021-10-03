@@ -79,7 +79,7 @@ To get our epidemic going we will need some infected, so we use a simple for loo
 
 Once we have picked a random node we use `nodestate!` to change the state of the node to infected. The time required for this command scales with the number of link states that we keep track of and the degree of the node, but not on the overall size of the network. 
 
-## The rates! function 
+## The `rates!` function 
 Now that we have our network set up, it's time to get to the physics of the system, i.e. the rules that will drive the dynamics. A crucial part of an event-driven simulation is to calculate how fast the different processes run in the current state of the network (whatever that may be). In our SIS model we calculate these rate in the following function
 
 ```julia
@@ -94,7 +94,7 @@ function rates!(rates,t)    # This functins computes the rates of processes
 end
 ```
 
-In a Fastnet simulation the rates function takes two arguments, a vector that needs to be filled with the rates and the current time. Note that the function does not need to return the computed rates but instead fills them into the vector that is provided as an argument. This is done for performance reasons. In the rates! function performance is crucial as this function will be called many, many times in the simulation. 
+In a Fastnet simulation the rates function takes two arguments, a vector that needs to be filled with the rates and the current time. Note that the function does not need to return the computed rates but instead fills them into the vector that is provided as an argument. This is done for performance reasons. In the `rates!` function performance is crucial as this function will be called many, many times in the simulation. 
 
 To compute the node the current rate at which infection and recovery events are happening we need to know how many infected nodes and how many SI-links there are in the network. We find these numbers with the `countnodes` and `countlinks` functions, respectively. Despite their names, these functions do not actually need to count anything, the net knows the answer already, so they both work in constant time. 
 
