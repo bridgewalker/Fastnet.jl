@@ -5,7 +5,7 @@
 Fastnet achieves linear-time performance by using an innovative data structure. The underlying network is a potentially directed and potentially non-simple graph. The package provides a convenient syntax that allows to implement common model in a few simple lines of code. The simulations are done using using an event-driven (Gillespie) algortithm offering fast performance and excellent agreement with real world continuous-time processes. Using fastnet models with millions of nodes can be run within minutes on a standard labtop. 
 
 ## Publication
-This Package is described also in the following publication
+This package is described also in the following publication
 ```
 TBA
 ```
