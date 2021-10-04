@@ -9,6 +9,7 @@ Formatting = "59287772-0a20-5a39-b81b-1366585eb4c0"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Repos = "952dd333-a03f-400d-b720-7cb119ba64f7"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"
 
 [compat]
 DataFrames = "1.2.2"

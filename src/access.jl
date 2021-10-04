@@ -416,3 +416,34 @@ function degreedist(net::FastNet)
     end
     dd
 end
+
+
+"""
+    quickplotnodes(sim)        
+
+Return a UnicodePlot of the node timeseries stored in FastSim *sim*.
+  
+"""
+function quickplotnodes(sim::FastSim)
+    res=sim.results
+    plt=lineplot(res[!,1],res[!,2],ylim=[0,sim.net.N],name=sim.net.nodealias[1],width=60,xlabel="Time t")
+    for i=2:sim.net.C-1
+        plt=lineplot!(plt,res[!,1],res[!,i+1],name=sim.net.nodealias[i])
+    end
+    plt
+end
+
+"""
+    quickplotlink(sim)        
+
+Return a UnicodePlot of the link timeseries from the results stored in FastSim *sim*.
+  
+"""
+function quickplotlinks(sim::FastSim)
+    res=sim.results
+    plt=lineplot(res[!,1],res[!,sim.net.C+1],ylim=[0,sim.net.K],name=sim.net.linkalias[1],width=60,xlabel="Time t")
+    for i=2:sim.net.L-2
+        plt=lineplot!(plt,res[!,1],res[!,sim.net.C+i],name=sim.net.linkalias[i])
+    end
+    plt
+end

@@ -54,8 +54,6 @@ function showresults(sim::FastSim,head::Bool)
     end
 end
 
-
-
 """
     simstep!(sim)
 
@@ -113,7 +111,6 @@ function simstep!(sim::FastSim)
     initsim(sim,del,del)
     sim.repfunc(sim,true)
     sim.t+=del
-    println(tot)
     if tot>0.0
          r=rand(rng,EPS:tot)-rates[1]
          i=1
@@ -221,6 +218,9 @@ function runsim!(sim::FastSim,dur,out=1.0)
             sim.procfunc[i]()
         end 
     end
+    if sim.printresults==true
+        display(quickplotnodes(sim))
+    end    
     nothing
 end
 

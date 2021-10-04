@@ -29,17 +29,17 @@ function rates!(rates,t)    # This functins computes the rates of processes
     nothing
 end
 
-function recovery!()        # This is what we do when the recovery process is triggered
+function recovery()        # This is what we do when the recovery process is triggered
     inode=randomnode_f(net,I)                   # Find a random infected node
     nodestate_f!(net,inode,S)                   # Set the state of the node to susceptible
 end
 
-function infection!()       # This is what we do when the infection process is triggered
+function infection()       # This is what we do when the infection process is triggered
     alink=randomlink_f(net,SI)                   # Find a random SI link
     nodestate_f!(net,linksrc_f(net,alink),I)     # Set both endpoints of the link to infected
     nodestate_f!(net,linkdst_f(net,alink),I)    
 end
 
-sim=FastSim(net,rates!,[infection!,recovery!])   # initialize the simulation 
+sim=FastSim(net,rates!,[infection,recovery])   # initialize the simulation 
 
 @time runsim!(sim,60,5)                      # Run for 60 timeunits (reporting every 5)

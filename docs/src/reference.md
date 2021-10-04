@@ -11,6 +11,7 @@ FastSim
 ## Network Setup
 
 ```@docs
+adjacency!
 nullgraph!
 randomgraph!
 configmodel!
@@ -21,7 +22,7 @@ rectlattice!
 ## Node Functions
 
 ```@docs
-Fastnet.adjacent
+adjacent
 countnodes
 degree
 destroynode!

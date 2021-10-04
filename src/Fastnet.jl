@@ -2,9 +2,10 @@
 
 module Fastnet
 
-using StaticArrays,Random,DataFrames,Formatting
+using StaticArrays,Random,DataFrames,Formatting,UnicodePlots
 
 export FastNet,FastSim,LinkType,
+    adjacent,
     node_f, node,           # Node functions
     nodestate_f, nodestate,  
     nodestate_f!, nodestate!,
@@ -55,6 +56,8 @@ export FastNet,FastSim,LinkType,
     savelinklist,
     savenodeinfo,
     degreedist,
+    quickplotnodes,
+    quickplotlinks,
 
     runsim!,                  # Simulation 
     simstep!
