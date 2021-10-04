@@ -7,7 +7,7 @@ This depends mainly on how much memory you have. Fastnet can simulate networks w
 Yes, you can initialize your random number generator however you want and then pass it as an argument in the FastNet constructor. 
 
 ## Should I use the fast functions or not?
-Use the slow/safe version of Fastnet functions at first. Once everythign runs well switch the function calls in your *rates!* and process functions to the fast versions. 
+Use the slow/safe version of Fastnet functions at first. Once everything runs well switch the function calls in your `rates!` and process functions to the fast versions. 
 
 ## Is this the fastest network simulation code?
 For adaptive networks it probably is, for other models maybe. It may actually depend on a number of details such as the degree distribution of the network.
