@@ -471,6 +471,90 @@ function configmodel_DG!(net::FastNet,degreedist,N::Int=0,S::Int=1)
     println("On track")
 end
 
+"""
+    randomgeometricgraph!(net::FastNet; N::Int,K::Int,S::Int, dim::Int, deg::Float64)
 
+Create a random geometric graph with mean degree *deg*. 
+
+The network in *net* is replaced with the new topology in which each node has *dim* vector entries uniformly drawn
+from (0,1). A maximal connection distance is calculated from the given mean degree and nodes get connected,
+when their euclidean distance is smaller than the maximal connection distance. 
+
+If there FastNet is not large enough to accomodate the desired number of links or nodes an argument error 
+will be thrown.
+
+Additionaly, if the calculated maximal connection distance results in more links being generated than supported by the net,
+an argument error will be thrown as well.
+
+The keyword arguments are 
+- N : The number of nodes that will be used in the creation of the network
+- S : The state of the nodes. All nodes will be set to this state.
+- dim : Dimensions of the random geometric graph.
+- deg : The graph´s mean degree which is used to calculate the maximal connection distance between nodes.
+
+# Examples 
+```jldoctest
+julia> using Fastnet
+
+julia>  net=FastNet(1000,2000,2,[])
+Network of 0 nodes and 0 links
+
+julia> randomgeometricgraph!(net,dim=2,meandegree=2.0)
+Network of 1000 nodes and 970 links
+
+```
+"""
+function randomgeometricgraph!(net::FastNet; N::Int=0,K::Int=0,S::Int=1, dim::Int=2, deg::Float64=2.0)
+    nullgraph!(net)
+    n=N;
+    k=K;
+    s=S;
+    if n===0
+        n=net.N
+    end 
+    if k===0
+        k=net.K
+    end
+    if n<1 && k>0
+        throw(ArgumentError("In order to create links the net has to have at least one node"))
+    end
+    if n>net.N
+        throw(ArgumentError("Trying to create more nodes than maximum allowed by the net"))
+    end
+    if k>net.K
+        throw(ArgumentError("Trying to create more links than maximum allowed by the net"))
+    end
+    if s<1 || s>net.C-1
+        msg="The net passed to randomgeometricgraph! only supports node states between 1 and $(net.C-1),"
+        msg*=" but you are asking it to set nodes to state $s."
+        throw(ArgumentError(msg))
+    end
+
+    r = (1/2)*((deg/n) * double_factorial(dim) / (pi/2)^(floor(dim/2)))^(1/dim)
+    makenodes!(net,n,s)
+    loc = rand(n,dim)
+    for i = 1:n
+        for j = i+1:n
+            dist = sqrt(sum((loc[i,:].-loc[j,:]).^2))
+            if (dist < r)
+                if countlinks_f(net)>=k
+                    throw(ArgumentError("For the given mean degree, you would create more links than allowed by the net"))
+                end
+                makelink_f!(net,i,j)
+            end
+        end
+    end
+    net
+end
+
+function double_factorial(n::Int)
+    if isodd(n)
+        k=Int((n+1)/2)
+        return factorial(2*k-1)/(2^(k-1)*factorial(k-1))
+    else
+        k=Int(n/2)
+        return 2^k*factorial(k)
+    end
+end
 
 
