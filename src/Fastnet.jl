@@ -43,6 +43,7 @@ export FastNet,FastSim,LinkType,
     regulargraph!,
     rectlattice!,
     adjacency!,
+    randomgeometricgraph!,
 
     showlinks,shownodes,     # Debug Functions
     healthcheck,
