@@ -492,6 +492,8 @@ The keyword arguments are
 - dim : Dimensions of the random geometric graph.
 - deg : The graph´s mean degree which is used to calculate the maximal connection distance between nodes.
 
+Additionally, the randomgeometricgraph! method returns the randomly drawn locations, on the basis of which links are determined.
+
 # Examples 
 ```jldoctest
 julia> using Fastnet
@@ -499,8 +501,17 @@ julia> using Fastnet
 julia>  net=FastNet(1000,2000,2,[])
 Network of 0 nodes and 0 links
 
-julia> randomgeometricgraph!(net,dim=2,meandegree=2.0)
-Network of 1000 nodes and 970 links
+julia> randomgeometricgraph!(net,dim=2,deg=2.0)
+1000-element Vector{Vector{Float64}}:
+ [0.0549573539353696, 0.6244127152701604]
+ [0.9944073816581036, 0.09579907858129899]
+ [0.6265801081152982, 0.0959307873957016]
+ [0.6719094023989565, 0.6739448587408032]
+ ⋮
+ [0.1103149687235696, 0.23648825564038534]
+ [0.4307079263456808, 0.9950438232744283]
+ [0.015363387470445966, 0.297330793313497]
+ [0.31627182366544293, 0.9993577297364635]
 
 ```
 """
@@ -532,7 +543,7 @@ function randomgeometricgraph!(net::FastNet; N::Int=0,K::Int=0,S::Int=1, dim::In
 
     r = (1/2)*((deg/n) * double_factorial(dim) / (pi/2)^(floor(dim/2)))^(1/dim)
     makenodes!(net,n,s)
-    loc = rand(n,dim)
+    loc = rand(net.rng,n,dim)
     for i = 1:n
         for j = i+1:n
             dist = sqrt(sum((loc[i,:].-loc[j,:]).^2))
@@ -544,7 +555,7 @@ function randomgeometricgraph!(net::FastNet; N::Int=0,K::Int=0,S::Int=1, dim::In
             end
         end
     end
-    net
+    return [loc[i,:] for i in 1:n]
 end
 
 function double_factorial(n::Int)
