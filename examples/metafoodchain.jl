@@ -38,7 +38,7 @@ for i=1:n                                        # Assign patch state at random
     nodestate_f!(net,node_f(net,i),rand_init[i])
 end
 
-function rates!(rates,t)    # This functins computes the rates of processes
+function rates!(rates,t)    # This function computes the rates of processes
     rates[1]=mortality[1]*countnodes(net,present1)             # species 1 death
     rates[2]=mortality[2]*countnodes(net,present2)                # species 2 death
     rates[3]=mortality[3]*countnodes(net,present3)                     # species 3 death

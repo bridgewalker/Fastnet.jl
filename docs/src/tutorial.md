@@ -104,7 +104,7 @@ Finally we fill the `rates` vector with the results. Here we chose to put the in
 
 The final `nothing` tells Julia that the function does not have a return value. 
 
-(One may wonder whether it would be more efficient to squeeze the six lines of code into two lines and avoid the definition of intermediate variables. The answer is generally no. Julia is a compiled language and the compiler will take care of such small scale optimizations for us, so it won't make a difference in performance. In this case the longer form makes the code more readable and makes it easier to fnd bugs.)
+(One may wonder whether it would be more efficient to squeeze the six lines of code into two lines and avoid the definition of intermediate variables. The answer is generally no. Julia is a compiled language and the compiler will take care of such small scale optimizations for us, so it won't make a difference in performance. In this case the longer form makes the code more readable and makes it easier to find bugs.)
 
 ## Implementing the processes
 As the final piece of our model we need to define what happens when the processes occur we do this by defining two more functions 
@@ -128,7 +128,7 @@ If a recovery event occurs a random node recovers, so in our `recovery!` functio
 
 In an infection event the disease gets passed along a random SI-link, so we use `randomlink` to pick an SI link at random. Then we find the two endpoints of the link with `linksrc` and `linkdst`. We could then use an `if` statement to find out which one of the two endpoints is the susceptible node, but ifs create control hazards which aren't great for performance so its probably a bit quicker to set both of the endpoints to the infected state. (One of them was infected anyway and the other is the one that we need to infect.)
 
-Again the fuctions used in our implementation of these processes run either in constant time (`randomnode`, `randomlink`, `linksrc`, `linkdst`), or they scale only with the degree of the affected node and the number of link states that we are tracking (`nodestate!`), hence the runtime required to simulate one event won't depend on the network size. Simulating a network for a finite time will still scale linearly with network size as larger networks have more nodes and links on which events can occur.  
+Again the functions used in our implementation of these processes run either in constant time (`randomnode`, `randomlink`, `linksrc`, `linkdst`), or they scale only with the degree of the affected node and the number of link states that we are tracking (`nodestate!`), hence the runtime required to simulate one event won't depend on the network size. Simulating a network for a finite time will still scale linearly with network size as larger networks have more nodes and links on which events can occur.  
 
 ### Simulation
 Now that we have all the pieces, we can set up and run the simulation
@@ -152,7 +152,7 @@ Before the `runsim` I have added Julia's `@time` macro which times the performan
 But before we run really large simulations we should make one final improvement...
 
 ## Faster functions
-To help with debugging, functions such as `nodestate!` carry out a number of checks and try to provide meaningful error message if their arguments look iffy. This comes at a price in terms of performance. Because your rates and process functions might be called billions of times in large simulations, you may want to avoid these extra checks. For this purpose Fastnet provides faster implementations for some of the key functions. The names of these functions are identical to the other function names with an added `_f` at the end, so in addion to `nodestate!` there is also 
+To help with debugging, functions such as `nodestate!` carry out a number of checks and try to provide meaningful error message if their arguments look iffy. This comes at a price in terms of performance. Because your rates and process functions might be called billions of times in large simulations, you may want to avoid these extra checks. For this purpose Fastnet provides faster implementations for some of the key functions. The names of these functions are identical to the other function names with an added `_f` at the end, so in addition to `nodestate!` there is also 
 
 ```julia
 nodestate_f!(net::FastNet,node,newstate)

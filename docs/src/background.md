@@ -4,15 +4,15 @@ This section contains some background information about the way in which fastnet
 ## How to simulate processes on networks
 If we think about simulating processes on networks, the first idea that usually comes to mind are to update all nodes simultaneously in small time steps. This idea is attractive because it makes thinking about the simulation seemingly easier, however it entails a number of problems.
 
-1. Update order -- How do we actually implement our timesteps? Do we update every node in every timestep? And if so in which order do we update them. If the order is always the same we will create artifacts (unrealistic artifical behavior), so we need to randomize. But such randomization can lead to further problems, for instance do we keep track of who has already been updated etc.  
+1. Update order -- How do we actually implement our timesteps? Do we update every node in every timestep? And if so in which order do we update them. If the order is always the same we will create artifacts (unrealistic artificial behavior), so we need to randomize. But such randomization can lead to further problems, for instance do we keep track of who has already been updated etc.  
 
 2. Collisions -- What do we do if different events that occur in one timestep are contradictory? For example what if a node in an epidemic situation infects another node and recovers from the disease at the same time. Does the infection always go first? Or can the recovery occur first making the infection event impossible? 
 
-3. Timing artifacts -- Even if we find elegant solutions for event collisions and update order, we are still approximating a real-word system in which time flows continously by a model in which time proceeds in discrete steps. This in itself can cause some artifacts. For example it can lead to the formation of certain patterns which won't occur in the continuous time system.  
+3. Timing artifacts -- Even if we find elegant solutions for event collisions and update order, we are still approximating a real-word system in which time flows continuously by a model in which time proceeds in discrete steps. This in itself can cause some artifacts. For example it can lead to the formation of certain patterns which won't occur in the continuous time system.  
 
 4. Efficiency -- The most common solution to the problems above is to make timesteps tiny. While this lessens the impact of the artifacts it does not prevent them altogether. Moreover, it comes at a high cost in terms of efficiency. We will need to simulate many timesteps to cover the desired stretch of time, and in each of these steps we will be checking a large number of nodes for possible updates. However, since our timesteps are now tiny the probability that a given node is affected by an event in a given timestep is tiny, often in below 1 in a million. This means we spent a lot of computation time to do updates on nodes in which nothing changes at all.  
 
-Simulations that work with discrete timesteps can still be a good idea if the underlying system fundamentally works in discrete timesteps. However, in the vast majority of cases we can simulate systems better, faster, and more elgantly by not using timesteps at all...
+Simulations that work with discrete timesteps can still be a good idea if the underlying system fundamentally works in discrete timesteps. However, in the vast majority of cases we can simulate systems better, faster, and more elegantly by not using timesteps at all...
 
 ## The Gillespie Algorithms
 In 1976 Daniel T. Gillespie published the idea for an event-driven simulation algorithm
@@ -40,4 +40,4 @@ The basic idea for the bookkeeping used in Fastnet was born while we were workin
 ```
 T. Gross, C.J. Dommar D’Lima and B. Blasius (2006) "Epidemic dynamics on an adaptive network." Phys. Rev. Lett. 96, 208701.
 ```
-The underlying datastructure that makes the bookkeeping possible is also available in Julia, on its own in the [Repos package](https://github.com/bridgewalker/Repos.jl) Fastnet does not use this package but rather reimplements the Repos structure in an opimized way for its current application. 
+The underlying datastructure that makes the bookkeeping possible is also available in Julia, on its own in the [Repos package](https://github.com/bridgewalker/Repos.jl) Fastnet does not use this package but rather reimplements the Repos structure in an optimized way for its current application. 
