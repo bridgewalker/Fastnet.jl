@@ -374,7 +374,7 @@ function check_linkstateification(net::FastNet)
                     cc=net.ttable[sc,dc]
                     if cc!=c
                         error=true
-                        print("\n     + Link $kid is in state $c but it connects node $src (state $sc) to $dst (state $dc) which means it schould be in state $cc")        
+                        print("\n     + Link $kid is in state $c but it connects node $src (state $sc) to $dst (state $dc) which means it should be in state $cc")        
                     end
                 end
             end
@@ -392,15 +392,15 @@ end
 """
     healthcheck(net)
 
-Perform an internal consistencey check on a FastNet *net*.
+Perform an internal consistency check on a FastNet *net*.
 
-To achieve the desired performance Fastnet engages in a certain amount of double bookeeping.
+To achieve the desired performance Fastnet engages in a certain amount of double bookkeeping.
 In an ideal world the FastNet structures should always stay internally consistent. However,
-inconsistencies could arise from a number of sources including software bugs, CPU and memeory 
+inconsistencies could arise from a number of sources including software bugs, CPU and memory 
 errors. This function checks the internal data stored in FastNet for consistency to make sure 
 that everything is alright. 
 
-The return value is true if all chacks have been passed, false otherwise. 
+The return value is true if all checks have been passed, false otherwise. 
 
 See also [link](#Fastnet.link)
 

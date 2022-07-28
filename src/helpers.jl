@@ -51,7 +51,7 @@ function make_linkstate_table(tlist,c,L)
                     continue    
                 end
                 if (m[i,j]!=L-1)
-                    throw(ArgumentError("LinkTyoe number $rule, passed to the FastNet constructure, seems to say that links of the form from state $i to state $j are of type $rule, but they were previously defined as LinkType $(m[i,j])."))
+                    throw(ArgumentError("LinkTyoe number $rule, passed to the FastNet constructor, seems to say that links of the form from state $i to state $j are of type $rule, but they were previously defined as LinkType $(m[i,j])."))
                 end
                 m[i,j]=rule
             end
@@ -73,7 +73,7 @@ function make_linkstate_table(tlist,c,L)
                     continue    
                 end                
                 if (m[i,j]!=L-1)
-                    throw(ArgumentError("LinkTyoe number $rule, passed to the FastNet constructure, seems to say that links of the form from state $i to state $j are of type $rule, but they were previously defined as LinkType $(m[i,j])."))
+                    throw(ArgumentError("LinkTyoe number $rule, passed to the FastNet constructor, seems to say that links of the form from state $i to state $j are of type $rule, but they were previously defined as LinkType $(m[i,j])."))
                 end
                 m[i,j]=rule
             end

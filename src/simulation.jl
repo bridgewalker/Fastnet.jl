@@ -61,7 +61,7 @@ Simulate the next event in *sim*.
 
 This function will always advance the sim by exactly one event.
 If no event is possible it will advance time by one timeunit.  
-Output is generated at start time and directly after the event has occured. 
+Output is generated at start time and directly after the event has occurred. 
 
 See also [FastSim](#Fastnet.FastSim),[simstep](#Fastnet.simstep) 
 
@@ -133,10 +133,10 @@ be updated to reflect the current state of the network (though see notes
 on the simulation time, [here](#Fastnet.FastSim)).  
 
 This function simulates the FastSim **at least** for a certain time. If there 
-are still events occuring in the simulation by the end of the simulation run 
+are still events occurring in the simulation by the end of the simulation run 
 the simulation will stop directly after the first event that happens after *dur*.
 So the simulation time will always be greater than *dur*. In general the difference and 
-the actual simulation time will be tiny, but in case events are extreley rare the
+the actual simulation time will be tiny, but in case events are extremely rare the
 simulation may run significantly beyond *dur*. This behaviour is necessary to 
 avoid a watchdog-paradox artifact when repeatedly starting short runs. 
 

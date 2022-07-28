@@ -2,7 +2,7 @@
 """
 results(FastNet)        
 
-Return a refernce to the results of *sim* as a DataFrame
+Return a reference to the results of *sim* as a DataFrame
 
 # Example
 ```jldoctest
@@ -106,7 +106,7 @@ end
 """
     listneighbors(FastNet,nid)        
 
-Return a vector of the IDs of all nodes that are asjacent to node *nid* in FastNet *net*. 
+Return a vector of the IDs of all nodes that are adjacent to node *nid* in FastNet *net*. 
 
 This function is comparatively slow as it needs to allocate the vector. In your *rates!* 
 and process functions it is preferable to iterate over the neighbors using firstlinkout,
@@ -289,13 +289,13 @@ end
 
 Save network link list of network *net* to file *filename*.
 
-The file is written in text mode. Each line that is written correosponds to 
+The file is written in text mode. Each line that is written corresponds to 
 one link. The lines have the form 
 
     LINKID SOURCE DESTINATION
 
 Where LINKID is the respective link, SOURCE is the node id of the source node and DESTINATION 
-is the node id  of the destination node. The elemnts are separated by space. The line is ended by a line feed '\\n'.
+is the node id  of the destination node. The elements are separated by space. The line is ended by a line feed '\\n'.
  
 See also [linklist](#Fastnet.linklist) 
 """
@@ -322,7 +322,7 @@ end
 
 Save information about the nodes to file *filename*.
 
-The file is written in text mode. Each line that is written correosponds to 
+The file is written in text mode. Each line that is written corresponds to 
 one nodes. The lines have the form 
 
     NODEID STATE INDEGREE OUTDEGREE IN-NEIGHBORS OUT-NEIGBORS

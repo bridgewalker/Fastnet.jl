@@ -35,7 +35,7 @@ for i=1:20                              # Infect 20 susceptible nodes at random
     nodestate!(net,node,I)
 end
 
-function rates!(rates,t)                # This functins computes the rates of processes
+function rates!(rates,t)                # This function computes the rates of processes
     infected=countnodes_f(net,I)                # count the infected nodes
     activelinks=countlinks_f(net,SI)            # count the SI links
     rates[1]=p*activelinks                       # compute total infection rate

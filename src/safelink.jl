@@ -9,10 +9,10 @@ Determine link id from relative *rp*  position and node state *s*.
 
 The link function provides a way to access links form the set of nodes in a certain link state,
 or from the set of all links. The two-argument version returns the id of the 
-link at poition *rp* in network *net*. The three-argument version returns the id of the link at 
-poition *rp* within the set of links that are in state *s*.
+link at position *rp* in network *net*. The three-argument version returns the id of the link at 
+position *rp* within the set of links that are in state *s*.
 
-All version of this function run in constant time, but fast (_f) verions sacrifice some safty 
+All versions of this function run in constant time, but fast (_f) versions sacrifice some safety 
 checks for better performance. See [basic concepts](concepts.md) for details. 
 
 See also [adjacent](#Fastnet.adjacent)
@@ -66,7 +66,7 @@ end
     linkcounts(net)
     linkcounts_f(net)
 
-Return an Array containing the number of link in the vairous link states. 
+Return an Array containing the number of link in the various link states. 
 
 The elements of the array will show the counts in the same order in which the link types 
 were passed to the FastNet Constructor. 
@@ -117,7 +117,7 @@ Return the state of the link with id *kid* in network *net*.
 Note that the link states are numbered in the order in which they were passed to 
 the FastNet Constructor. 
 
-All version of this function run in constant time, but fast (_f) verion sacrifices some safty 
+All versions of this function run in constant time, but fast (_f) versions sacrifice some safety 
 checks for better performance. See [basic concepts](concepts.md) for details. 
     
 See also [nodestate!](#Fastnet.nodestate!), [FastNet](#FastNet.FastNet)
@@ -155,7 +155,7 @@ Create a new link from node *src* to node*dst* in the network *net* and return i
 
 Worst-case performance of both versions of this function scales only with the number of tracked link states.  
 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 See also [destroylink!](#Fastnet.destrolink!)
@@ -196,7 +196,7 @@ end
 Destroy the link with id *kid* in network *net*. 
 
 All versions of this function run in constant time. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 See also [makelink!](#Fastnet.makelink!)
@@ -239,7 +239,7 @@ end
 Return the id of the node at the source of link *kid* in *net*. 
 
 All versions of this function run in constant time. 
-The fast (_f) verion sacrifices some safty checks for better performance. 
+The fast (_f) version sacrifices some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 See also [makelink!](#Fastnet.makelink!)
@@ -275,7 +275,7 @@ end
 Return the id of the node at the destination of link *kid* in *net*. 
 
 All versions of this function run in constant time. 
-The fast (_f) verion sacrifices some safty checks for better performance. 
+The fast (_f) version sacrifices some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 See also [makelink!](#Fastnet.makelink!)
@@ -314,7 +314,7 @@ This function can be used to iterate over the outgoing links of a node. If *kid*
 last link the return value is zero. 
 
 All versions of this function run in constant time. 
-The fast (_f) verion sacrifices some safty checks for better performance. 
+The fast (_f) version sacrifices some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 See also [firstlinkout](#Fastnet.firstlinkout), [nextlinkin](#Fastnet.nextlinkin)
@@ -371,7 +371,7 @@ This function can be used to iterate over the incoming links of a node. If *kid*
 last link the return value is zero. 
 
 All versions of this function run in constant time. 
-The fast (_f) verion sacrifices some safty checks for better performance. 
+The fast (_f) version sacrifices some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 See also [firstlinkin](#Fastnet.firstlinkin), [nextlinkout](#Fastnet.nextlinkout)
@@ -429,10 +429,10 @@ Count the links in state *s*, or, if no state is provided, in the entire network
 Instead of the state *s* also an Array or Tuple of states can be passed. 
 In this case the total number of nodes in all of the listed states is returned. 
 
-The links in a sincle class or the entire network are counted in constant time. 
+The links in a single class or the entire network are counted in constant time. 
 For the tuples or array arguments the performance scales with the number of elements in the 
 Tulps/Array. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 If performance is critical use this function rather than linkcounts.
@@ -497,7 +497,7 @@ end
 Return true node with id *kid* exists in *net*, false otherwise.  
 
 This function runs in constant time. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
 
 See also [makelink!](#Fastnet.makelink!) 

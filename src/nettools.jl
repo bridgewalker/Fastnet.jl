@@ -112,7 +112,7 @@ The algorithm will try to match the desired degree distribution as closely as po
 but small discrepancies can appear if the degree distribution would result in an odd degree sum 
 or non integer numbers of nodes of certain degrees. 
 
-If there FastNet is not large enough to accomodate the desired number of links or nodes an argument error 
+If there FastNet is not large enough to accommodate the desired number of links or nodes an argument error 
 will be thrown. 
 
 The keyword arguments are 
@@ -191,7 +191,7 @@ The network generation is fast and unbiased, but isn't guaranteed to result in a
 Note that finite regular graphs with odd node degree and odd number of nodes do not exist. Hence 
 either *deg* or the number of nodes must be even. 
 
-If there FastNet is not large enough to accomodate the desired number of links or nodes an argument error 
+If there FastNet is not large enough to accommodate the desired number of links or nodes an argument error 
 will be thrown. 
 
 The keyword arguments are 
@@ -287,7 +287,7 @@ The network in *net* is replaced with the new topology, that is a lattice specif
 Alternatively, *dims* can be a vector of Ints. In this case the dimension of the lattice is identical to the 
 length of *dims* and each element of *dims* specifies the length of the lattice in one of these dimensions. 
 
-If there FastNet is not large enough to accomodate the desired number of nodes or links an argument error 
+If there FastNet is not large enough to accommodate the desired number of nodes or links an argument error 
 will be thrown. 
 
 Keyword arguments are 
@@ -381,13 +381,13 @@ Create a network with given adjacency matrix.
 The network in *net* is replaced with the new topology that is specified by the adjacency matrix *mat*. 
 If direction of links matters note that the element *mat[i,j]* corresponds to the link from j to i. 
 
-Symmeric matrices will not result in parallel links, instead the link is placed in an arbitrary direction. 
+Symmetric matrices will not result in parallel links, instead the link is placed in an arbitrary direction. 
 
 Note that node *n* in the matrix will be the node in position *n* in *net* after creation, which is 
 not necessarily the node with ID *n*, if you need to find a particular node at a later time then it
 is best to save its id using the node(net,pos) function directly after calling adjacency!(net,mat). 
 
-If *net* is not large enough to accomodate the desired number of nodes or links an argument error 
+If *net* is not large enough to accommodate the desired number of nodes or links an argument error 
 will be thrown. 
 
 Keyword arguments are 
@@ -480,10 +480,10 @@ The network in *net* is replaced with the new topology in which each node has *d
 from (0,1). A maximal connection distance is calculated from the given mean degree and nodes get connected,
 when their euclidean distance is smaller than the maximal connection distance. 
 
-If there FastNet is not large enough to accomodate the desired number of links or nodes an argument error 
+If there FastNet is not large enough to accommodate the desired number of links or nodes an argument error 
 will be thrown.
 
-Additionaly, if the calculated maximal connection distance results in more links being generated than supported by the net,
+Additionally, if the calculated maximal connection distance results in more links being generated than supported by the net,
 an argument error will be thrown as well.
 
 The keyword arguments are 
