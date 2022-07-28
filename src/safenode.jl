@@ -11,10 +11,10 @@ Determine node id from relative position and node state.
 
 The node function provides a way to access nodes form a the set of nodes in certain states,
 or from the set of all nodes in a simple way. The two-argument version returns the id of the 
-node at poition *rp* in network *net*. The three-argument version returns the id of the node at 
-poition *rp* within all nodes in state *s*.
+node at position *rp* in network *net*. The three-argument version returns the id of the node at 
+position *rp* within all nodes in state *s*.
 
-All version of this function run in constant time, but fast (_f) verions sacrifice some safty 
+All version of this function run in constant time, but fast (_f) versions sacrifice some safety 
 checks for better performance. See [basic concepts](concepts.md) for details. 
 
 # Examples 
@@ -67,7 +67,7 @@ end
     nodecounts(net)
     nodecounts_f(net)
 
-Return an Array containing the number of nodes in the vairous node states. 
+Return an Array containing the number of nodes in the various node states. 
 
 The time required for this function scales only with the number of node states
 (it is independent of the number of nodes). 
@@ -108,7 +108,7 @@ end
 
 Return the state of the node with id *nid* in network *net*. 
 
-All version of this function run in constant time, but fast (_f) verions sacrifice some safty 
+All version of this function run in constant time, but fast (_f) versions sacrifice some safety 
 checks for better performance. See [basic concepts](concepts.md) for details. 
     
 See also [nodestate!](#Fastnet.nodestate!)
@@ -148,7 +148,7 @@ Set the node with id *nid* in net *net* to *s*.
 Worst-case performance of both versions of this function is O(ks\\*k)+O(ns) where ks is the number of 
 tracked link states, k is the degree of the affected node and ns is the number of node states.  
 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 See also [nodestate](#Fastnet.nodestate)
@@ -187,7 +187,7 @@ Create a new node in state *s* in the network *net* and return it's id.
 
 Worst-case performance of both versions of this function scales only with the number of node states.  
 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 See also [destroynode!](#Fastnet.destroynode!), [makenodes!](#Fastnet.makenodes!)
@@ -227,7 +227,7 @@ Destroy the node with id *nid* in network *net*.
 Worst-case performance of both versions of this function is O(ks\\*k)+O(ns) where ks is the number of 
 tracked link states, k is the degree of the affected node and ns is the number of node states.  
 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 See also [makenode!](#Fastnet.makenode!)
@@ -269,7 +269,7 @@ Instead of the state *s* also an Array or Tuple of states can be passed.
 In this case the total number of nodes in all of the listed states is returned. 
 
 All versions of this function run in constant time. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
     
 If performance is critical use this function rather than nodecounts.
@@ -328,7 +328,7 @@ Return the link id of the first incoming link to the node with id *nid* in netwo
 If there are no incoming links then the return value is 0
 
 All versions of this function run in constant time. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
 
 See also [firstlinkout](#Fastnet.firstlinkout), [nextlinkin](#Fastnet.nextlinkin) 
@@ -374,7 +374,7 @@ Return the link id of the first outgoing link from the node with id *nid* in net
 If there are no outgoing links then the return value is 0
 
 All versions of this function run in constant time. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
 
 See also [firstlinkout](#Fastnet.firstlinkin), [nextlinkin](#Fastnet.nextlinkout) 
@@ -421,7 +421,7 @@ Here degree is interpreted as the number of times this node appears an an endpoi
 hence self-loops contribute 2 to the degree of the node that they link to. 
 
 The worst case performance scales only with the degree of the affected node. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
 
 See also [indegree](#Fastnet.indegree), [outdegree](#Fastnet.outdegree) 
@@ -464,7 +464,7 @@ end
 Return the incoming degree of the node with id *nid* in network *net*.  
 
 The worst case performance scales only with the indegree of the affected node. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
 
 See also [degree](#Fastnet.degree), [outdegree](#Fastnet.outdegree) 
@@ -507,7 +507,7 @@ end
 Return the outgoing degree of the node with id *nid* in network *net*.  
 
 The worst case performance scales only with the outdegree of the affected node. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
 
 See also [degree](#Fastnet.degree), [indegree](#Fastnet.indegree) 
@@ -550,7 +550,7 @@ end
 Return if a node with id *nid* exists in *net*, false otherwise.  
 
 This function runs in constant time. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
 
 See also [makenode!](#Fastnet.makenode!), [destroynode!](#Fastnet.destroynode!) 
@@ -582,7 +582,7 @@ end
 Create *N* nodes in state *s* in the network *net.  
 
 Worst case performance of this function scales only with the number of node states. 
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
 
 See also [makenode!](#Fastnet.makenode!), [destroynode!](#Fastnet.destroynode!) 
@@ -622,7 +622,7 @@ drawn uniformly from the nodes in the states listed.
 
 This function runs in constant time if *s* is integer or omitted. If *s* is an Array or Tuple the 
 worst case performance scales only with the number of node states.  
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
 
 The safe versions of this function will throw an ArgumentError with an informative error message
@@ -687,7 +687,7 @@ a->b if such a link exists.
 Calling adjacent(net,a,a) will return a self-loop on a if one exists. 
 
 The worst case performance of this function scales with the degree of node a.
-The fast (_f) verions sacrifice some safty checks for better performance. 
+The fast (_f) versions sacrifice some safety checks for better performance. 
 See [basic concepts](concepts.md) for details. 
   
 # Examples 

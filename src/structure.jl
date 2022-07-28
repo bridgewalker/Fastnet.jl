@@ -63,7 +63,7 @@ end
 """
     FastNet(n,k,c,tlist;<keyword arguments>) 
 
-Create a FastNet object that represents a network structe.
+Create a FastNet object that represents a network structure.
 
 Memory will be allocated for up to *n* nodes, up to *k* links. Nodes can be in one of *c* different states.
 
@@ -73,7 +73,7 @@ infected and susceptible nodes. FastNet will do the necessary bookkeeping, to en
 of the links that are in a state listed in tlist. 
 
 Note that the order of elements of tlist is not arbitrary. FastNet will think of links that match the first element 
-of tlist as being in link state 1. The links that match the sceond type in link state 2, and so on. 
+of tlist as being in link state 1. The links that match the second type in link state 2, and so on. 
 
 WARNING: Each link in the network can only be in any one state at any time passing a tlist that contains overlapping 
 link types (e.g. [LinkType([1,2],3),LinkType(3,1)] )  will result in an ArgumentError being thrown. 
@@ -263,11 +263,11 @@ filling the array that was passed as the first argument. The rates! should not h
 Note that when rates are time dependent then the rates! function should use the time value passed to it rather 
 than obtaining a time form the simulation structure. The simulation code assumes that the rates will remain 
 constant until the next event. This should be harmless in almost all cases but can cause inaccuracy if your 
-rates depend explicitely on time, the rates are very senstitive to time and events are rare. 
+rates depend explicitly on time, the rates are very sensitive to time and events are rare. 
 
 The third argument is a Vector of functions that implements the processes. The processes are functions 
-without arguments when they are called they should implement effect of the respecive process running once.
-Note that elemets of the process function vector should be in the same order as the corresponding rates computed by 
+without arguments when they are called they should implement effect of the respective process running once.
+Note that elements of the process function vector should be in the same order as the corresponding rates computed by 
 the *rates!* vector.
 
 FastSim supports a number of optional keyword arguments:

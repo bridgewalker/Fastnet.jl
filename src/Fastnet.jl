@@ -48,7 +48,7 @@ export FastNet,FastSim,LinkType,
     showlinks,shownodes,     # Debug Functions
     healthcheck,
     
-    listnodes,               # Analaysis functions
+    listnodes,               # Analysis functions
     listlinks,
     listnodesinstate,
     listneighbors,

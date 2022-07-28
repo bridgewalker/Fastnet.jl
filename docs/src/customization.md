@@ -12,7 +12,7 @@ MyReportingFunction(sim::FastSim,head::Bool)
 ```
 The first argument that is passed is a reference to the sim that should be reported on. The second argument is a bool that tells the function whether a header needs to be printed. For example the default reporting function prints first the column heads of the output table and then the network state if true is passed. It prints only the network state if false is passed.  
 
-Once called your custom reporting function should handle all the neccessary printing, writing to disk, etc.  
+Once called your custom reporting function should handle all the necessary printing, writing to disk, etc.  
 Also your reporting function should push the node and link counts to the *sim.results* dataframe, if you want the 
 results to be stored there. You can do this by including 
 ```julia
@@ -39,7 +39,7 @@ Some useful information can be read from the first argument *sim*:
 
 The *printresults* field contains either true, if output should be printed to the terminal, false if no output should be printed to the terminal or an IOStream to which terminal output should be redirected. 
 
-Information about the network can be gained by calling the typeical functions (countnodes, etc.) on *sim.net*. In addition the FastNet object *sim.net* contains two fields that may be useful
+Information about the network can be gained by calling the typical functions (countnodes, etc.) on *sim.net*. In addition the FastNet object *sim.net* contains two fields that may be useful
 
 - *sim.net.nodealias* -- A Vector of strings containing names for the node states
 - *sim.net.linkalias* -- A Vector of strings containing names for the tracked link states

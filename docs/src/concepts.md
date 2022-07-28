@@ -5,7 +5,7 @@ In Fastnet there are two ways to refer to a specific network node:
 
 1. Node ID -- Every node has a unique ID number that never changes. The ID number may be recycled if a node is destroyed and later another node is created. All ID numbers are integers in the range 1:N, where N is the maximal node number that was passed to the FastNet constructor when the network was created. Node IDs are not necessarily consecutive so a network containing two nodes could contain the nodes with IDs 17 and 23 for example. 
 
-2. Node state and position -- We can also identify nodes by saying "the n'th node in state x" where n is one of the allowed node states and x is the so-called positon in this state. So in the epidemic model from the tutorial we might say we want the first infected node. A state-position pair will not always refer to the same node, but the positions are always numbered consecutively, so if there are two infected nodes these will have the positions 1 and 2 in the infected state.
+2. Node state and position -- We can also identify nodes by saying "the n'th node in state x" where n is one of the allowed node states and x is the so-called position in this state. So in the epidemic model from the tutorial we might say we want the first infected node. A state-position pair will not always refer to the same node, but the positions are always numbered consecutively, so if there are two infected nodes these will have the positions 1 and 2 in the infected state.
 
 In general the FastNet functions expect you to refer to nodes by node ID. However, class and position is useful for example if you want to iterate over all nodes in a certain state. You can obtain the ID of a node at a certain position using the function 
 ```julia
@@ -29,7 +29,7 @@ So there can in principle be a link that connects a node to itself and a given p
 The network has been implemented in this way mainly to improve the efficiency of models that should almost always remain simple graphs. Allowing the occasional multi-link or self-loop eliminates the need for constant checking if a given operation would make the graph non-simple. By contrast models that make extensive use of self-loops or multi-links are rare. As a result this feature presently remains a bit undertested, so use with caution.
 
 In the underlying data structure of Fastnet, every link is represented as a directed link (an arc in math-speak).
-This comes at no addional computational or memory cost and actually makes many nuances of the implementation easier. 
+This comes at no additional computational or memory cost and actually makes many nuances of the implementation easier. 
 Nevertheless the package has been developed with undirected networks in mind and we can often simply ignore the underlying directedness of links. What this means is that Fastnet can be used to implement models that use directed links, models that use undirected (or bidirectional) links, and even models that mix the two types. 
  
 One (mildly beneficial) effect of the directed nature of links is that there is a unique way to refer to the nodes at the end of the link. They can be determined by the functions 

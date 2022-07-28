@@ -1,7 +1,7 @@
 # Frequently Asked Questions
 
 ## How large can I make the network?
-This depends mainly on how much memory you have. Fastnet can simulate networks with several million nodes with relative ease. At some point you will see performance drop on the number of hard disk accesses on your operating system will spike. That is the point where Julia runs out of memory and some of the data needs to get parked on the hard disk. By contrast if you have a lot of memory available Fastnet can conceivably simulate sparce networks with billions of nodes. 
+This depends mainly on how much memory you have. Fastnet can simulate networks with several million nodes with relative ease. At some point you will see performance drop on the number of hard disk accesses on your operating system will spike. That is the point where Julia runs out of memory and some of the data needs to get parked on the hard disk. By contrast if you have a lot of memory available Fastnet can conceivably simulate sparse networks with billions of nodes. 
 
 ## Can I use my own seed / random number generator?
 Yes, you can initialize your random number generator however you want and then pass it as an argument in the FastNet constructor. 

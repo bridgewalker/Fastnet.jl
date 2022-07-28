@@ -7,7 +7,7 @@
 **Fastnet is a Julia package that allows very fast (linear-time) simulation of discrete-state dynamical processes on networks, such as commonly studied models of epidemics**
 
 Fastnet achieves linear-time performance by using an innovative data structure. The underlying network is a potentially directed and potentially non-simple graph. 
-The package provides a convenient syntax that allows to implement common models in a few simple lines of code. The simulations are done using an event-driven (Gillespie) algortithm offering fast performance and excellent agreement with real world continuous-time processes. Using Fastnet models with millions of nodes can be run within minutes on a standard laptop. 
+The package provides a convenient syntax that allows to implement common models in a few simple lines of code. The simulations are done using an event-driven (Gillespie) algorithm offering fast performance and excellent agreement with real world continuous-time processes. Using Fastnet models with millions of nodes can be run within minutes on a standard laptop. 
 
 ## Example
 
@@ -35,7 +35,7 @@ for i=1:20                              # Infect 20 susceptible nodes at random
     nodestate!(net,node,I)
 end
 
-function rates!(rates,t)                # This functins computes the rates of processes
+function rates!(rates,t)                # This function computes the rates of processes
     infected=countnodes_f(net,I)                # count the infected nodes
     activelinks=countlinks_f(net,SI)            # count the SI links
     rates[1]=p*activelinks                       # compute total infection rate
